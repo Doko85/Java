@@ -1,0 +1,71 @@
+import java.util.UUID;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class tryCC {
+
+	public static void main(String[] args) throws IOException {
+		int choice;
+		double amount;
+		String name, lastName, id;
+		String number = UUID.randomUUID().toString();
+		Scanner s = new Scanner(System.in);
+		System.out.println("Welcome to our system, please activate your account following the next steps:\n"
+    			+ "Insert your name");
+    	name = s.nextLine();
+    	System.out.println("Now insert your last name.");
+    	lastName = s.nextLine();
+    	System.out.println("Please provide your ID. (10 characters)");
+    	id = s.nextLine();
+    	if(id.length() != 10) {
+    		System.out.println("Please insert all of the 10 characters of your ID.");
+    		id = s.nextLine();
+    	}
+    	
+    	System.out.println("---------------------------------------------------\n");
+    	System.out.println("Well done, check out if the information you provided are correct:");
+    	System.out.println("\tName: " + name + "\n\Last Name: " + lastName + "\n\tID : " + id + "\n");
+    	System.out.println("Your bank account number is: " + numConto);
+		BankAccount BA = new BankAccount(name, lastName, id, number);
+		do {
+		System.out.println("\nWELCOME!\n"
+				+ "---------------------------------------------------\n"
+				+ "##\t1\t Deposit\n"
+				+ "##\t2\t Withdraw\n"
+				+ "##\t3\t Balance\n"
+				+ "##\t4\t Print the last 5 movements\n"
+				+ "##\t5\t Exit\n"
+				+ "---------------------------------------------------\n"
+				+ "Enter your choice.");
+		choice = s.nextInt();
+		
+		switch (choice) {
+        case 1:  
+        	System.out.println("Insert the amount you want to deposit:");
+        	amount = s.nextDouble();
+        	BA.Deposit(amount);
+        	break;
+        case 2: 
+        	System.out.println("Insert the amount you want to withdraw:");
+        	amount = s.nextDouble();
+        	BA.Withdraw(amount);
+        	break;
+        case 3:
+        	System.out.println(BA.Balance());
+        	break;
+        case 4: 
+        	BA.Movements();
+        	break;
+        case 5:
+        	System.out.println("Goodbye!");
+        	break;
+        default: 
+			System.out.println("Invalid selection!");
+			break;
+		}
+		} while (choice != 5);
+		
+		s.close();
+	}
+
+}
