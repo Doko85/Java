@@ -1,0 +1,67 @@
+public class BankAccount {
+	private double currentAmount = 0;
+	private String number = "";
+	private String name = "";
+	private String lastName = "";
+	private String id = "";
+	private String[] movements = new String[5];
+	
+	// constructor
+	public BankAccount(String name, String lastName, String id, String number) {
+		this.number = number;
+		this.currentAmount = 0;
+		this.name = name;
+		this.lastName = lastName;
+		this.id = id;
+	}
+	
+	// constructor
+		public BankAccount(String name, String lastName, String id, String number, double currentAmount) {
+		this.number = number;
+		this.currentAmount = currentAmount;
+		this.name = name;
+		this.lastName = lastName;
+		this.id = id;
+	}
+		
+	private String[] replace(String[] movements) {
+		for(int idx = 1; idx < movements.length; idx++) {
+			movements[idx-1] = movements[idx];
+			movements[idx] = "\n";
+		}
+		return movements;
+	}
+	
+	// new deposit on your bank account
+	public void Deposit(double amount) {
+		currentAmount += amount;
+		replace(movements);
+		movements[movements.length-1] = "An amount of  " + amount + " has been deposited on your bank account.\n";		
+	}
+	
+	// new withdraw from your bank account
+	public void Withdraw(double amount) {
+		if((currentAmount - amount) < 0) {
+			System.out.println("Sorry,  we can't perform the action because you don't have enough money on your bank account.");
+		} else {
+			currentAmount -= amount;
+			replace(movements);
+			movements[movements.length-1] = "An amount of " + amount + " has been withdrew from your bank account.\n";
+		}
+	}
+	
+	// Print of the last 5 movements
+	public void Movements() {
+		for(int i = movements.length -1; i > -1; i--) {
+			System.out.println(movements[i]);
+		}
+	}
+	
+	// Print of the current balance on your bank account
+	public String Balance() {
+		String balance = "The balance of the bank account number: " + number + "\n";
+		balance += "Property of : " + name + " " + lastName + " ID : " + id + "\n";
+		balance += "is: " + currentAmount + "$."; 
+		return balance;
+	}
+}
